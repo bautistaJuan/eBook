@@ -1,0 +1,48 @@
+/* 
+article {
+    border: solid;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+    width: 300px;
+}
+article>img {
+    width: 200px;
+    height: 250px;
+}
+
+
+article>p {
+    width: 200px;
+    height: auto;
+}
+
+article:hover>p {
+    display: inline;
+
+
+} */
+
+
+.arcticle-result {
+    border: solid 1px;
+    background-color: rgba(128, 128, 128, 0.107);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 0 2px;
+    overflow: hidden;
+    height: auto;
+    width: 200px;
+
+}
+
+
+
+
+.result-img {
+    width: 200px;
+    height: 250px;
+}
