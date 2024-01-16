@@ -1,7 +1,10 @@
-import "./book-view.ts";
 import { getData } from "./apis/getBooksItemsAPI";
+import "./pages/home.ts";
+import "./components/book-view.ts";
 async function main() {
-  // const e = await getData();
-  // console.log();
+  const root = document.querySelector(".root");
+  root.innerHTML = `
+    <home-page></home-page>
+  `;
 }
 main();

@@ -9,7 +9,7 @@ async function getData() {
   );
   // Search for title  :
   const getAPIBooksT = await fetch(
-    `https://www.googleapis.com/books/v1/volumes?q=crimen&maxResults=20&key=AIzaSyArKJEmIP1SiCVdKvcHxrlum0T3BaDuX1o`
+    `https://www.googleapis.com/books/v1/volumes?q=crimen&maxResults=40&key=AIzaSyArKJEmIP1SiCVdKvcHxrlum0T3BaDuX1o`
   );
   // Next Page  Result :
   const nextPage = await fetch(
