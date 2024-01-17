@@ -48,7 +48,7 @@ export default class Book extends HTMLElement {
         display: none;
         overflow: scroll;
       }
-      .popup-container {
+      .container-popup {
         position: fixed;
         top: 50%;
         left: 50%;
@@ -58,6 +58,11 @@ export default class Book extends HTMLElement {
         padding: 20px;
         border-radius: 10px;
         z-index: 1000;
+      }
+      .popup-btnClose{
+        color: red;
+        font-size: 31px;
+        cursor: pointer;
       }
     `;
     this.shadow.appendChild(style);
@@ -88,31 +93,11 @@ export default class Book extends HTMLElement {
             <p class="description">${description}</p>
           </div>
         `;
-        divCardContainer.addEventListener("click", () => {
-          console.log(title);
-
-          this.showPopup(title, description, thumbnail, divContainer);
-        });
-
         divContainer.appendChild(divCardContainer);
       }
     });
 
     this.shadow.appendChild(divContainer);
-  }
-
-  showPopup(title, description, thumbnail, divContainer) {
-    console.log(divContainer);
-
-    // Muestra la descripción de la carta seleccionada
-    const popupContainer = document.createElement("div");
-    popupContainer.className = "popup-container";
-    popupContainer.innerHTML = `
-      <h3>${title}</h3>
-      <p>${description}</p>
-    `;
-
-    divContainer.appendChild(popupContainer);
   }
 }
 

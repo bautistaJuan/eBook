@@ -1,10 +1,6 @@
-import { getData } from "./apis/getBooksItemsAPI";
-import "./pages/home.ts";
-import "./components/book-view.ts";
+import { initRouter } from "./router.ts";
 async function main() {
   const root = document.querySelector(".root");
-  root.innerHTML = `
-    <home-page></home-page>
-  `;
+  initRouter(root);
 }
 main();
