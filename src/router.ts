@@ -1,5 +1,6 @@
 import { initHome } from "./pages/home";
 import "./components/book-view";
+import "./components/searchForm";
 const routes = [
   {
     path: /\/search/,

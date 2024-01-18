@@ -2,12 +2,13 @@ import { getData } from "../apis/getBooksItemsAPI";
 
 export default class Book extends HTMLElement {
   shadow: ShadowRoot;
-
+  titleBook: string;
   constructor() {
     super();
     this.shadow = this.attachShadow({ mode: "open" });
+    this.titleBook = this.getAttribute("titleBook")!;
+    console.log("title", this.titleBook);
   }
-
   connectedCallback() {
     const style = document.createElement("style");
     style.innerHTML = `
@@ -72,7 +73,8 @@ export default class Book extends HTMLElement {
   async render() {
     const divContainer = document.createElement("div");
     divContainer.className = "container";
-    const data = await getData();
+
+    const data = await getData(this.titleBook);
     data.items.map(item => {
       let thumbnail =
         item.volumeInfo.imageLinks && item.volumeInfo.imageLinks.smallThumbnail;
