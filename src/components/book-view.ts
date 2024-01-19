@@ -15,39 +15,41 @@ export default class Book extends HTMLElement {
       h1, h2, h3, h4, p {
         margin: 0;
       }
-      .container {
+
+      .div-container-card {
         display: flex;
+        flex-direction: column;
         justify-content: center;
-        flex-wrap: wrap;
-        gap: 10px;
-        padding: 20px;
-      }
-      .div-container {
+        align-items: center;
         cursor: pointer;
-        width: 240px;
         height: auto;
         text-align: center;
         border-radius: 10px;
-        box-shadow: 3px 10px 22px grey;
         transition: transform 0.3s ease-out; /* Añadido para una transición suave */
       }
-      .div-container:hover {
-        transform: scale(1.1); /* Añadido para agrandar la carta al pasar el ratón */
+      .desc{
+        display:none;
+      }
+      .div-container-card:hover {
+        .result_img {
+          display:none;
+        }
+        .desc{
+          display:block;
+          transition: transform 0.3s ease-out; /* Añadido para una transición suave */
+        }
+        overflow: auto;
+        transform: scale(1); /* Añadido para agrandar la carta al pasar el ratón */
       }
       .result_img {
-        box-shadow: 0px 4px 4px grey;
-        border-radius: 13px;
-        border-bottom: double 8px;
-        border-left: groove 4px black;
-        width: 230px;
-        height: 260px;
+        box-shadow: -4px 4px 8px grey;
+        border-radius: 10px;
+        border-bottom: double 2px;
+        border-left: groove 2px black;
+        height: 200px;
       }
       .text-area {
-        padding: 5px;
-      }
-      .description {
-        display: none;
-        overflow: scroll;
+        margin-top: 7px;
       }
       .container-popup {
         position: fixed;
@@ -73,31 +75,51 @@ export default class Book extends HTMLElement {
   async render() {
     const divContainer = document.createElement("div");
     divContainer.className = "container";
+    const image = new URL(
+      "../images/Crimen-castigo.jpg",
+      import.meta.url
+    ).toString();
 
-    const data = await getData(this.titleBook);
-    data.items.map(item => {
-      let thumbnail =
-        item.volumeInfo.imageLinks && item.volumeInfo.imageLinks.smallThumbnail;
-      let description = item.volumeInfo.description;
-      let title = item.volumeInfo.title;
+    divContainer.innerHTML = `
+      <div class="div-container-card">
+        <img class="result_img" src="${image}" alt="Book Cover" />
+        <div class="text-area">
+          <h3 class="title">Titulo de tu libro</h3>
+          <p>Author</p>
+        </div>
+        <div class="desc">
+         <p class="description">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quo laboriosam consequuntur earum corrupti numquam iste quisquam optio nihil, laudantium officia.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas, ipsam!         
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas, ipsam!         
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas, ipsam!         
+          </p>
+        </div>
+      </div>
+    `;
+    // const data = await getData(this.titleBook);
+    // data.items.map(item => {
+    //   let thumbnail =
+    //     item.volumeInfo.imageLinks && item.volumeInfo.imageLinks.smallThumbnail;
+    //   let description = item.volumeInfo.description;
+    //   let title = item.volumeInfo.title;
 
-      if (
-        thumbnail !== undefined &&
-        description !== undefined &&
-        title !== undefined
-      ) {
-        const divCardContainer = document.createElement("div");
-        divCardContainer.className = "div-container";
-        divCardContainer.innerHTML = `
-          <img class="result_img" src="${thumbnail}" alt="Book Cover" />
-          <div class="text-area">
-            <h3 class="title">${title}</h3>
-            <p class="description">${description}</p>
-          </div>
-        `;
-        divContainer.appendChild(divCardContainer);
-      }
-    });
+    //   if (
+    //     thumbnail !== undefined &&
+    //     description !== undefined &&
+    //     title !== undefined
+    //   ) {
+    //     const divCardContainer = document.createElement("div");
+    //     divCardContainer.className = "div-container";
+    //     divCardContainer.innerHTML = `
+    //       <img class="result_img" src="${thumbnail}" alt="Book Cover" />
+    //       <div class="text-area">
+    //         <h3 class="title">${title}</h3>
+    //         <p class="description">${description}</p>
+    //       </div>
+    //     `;
+    //     divContainer.appendChild(divCardContainer);
+    //   }
+    // });
 
     this.shadow.appendChild(divContainer);
   }
