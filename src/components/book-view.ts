@@ -15,6 +15,9 @@ export default class Book extends HTMLElement {
       h1, h2, h3, h4, p {
         margin: 0;
       }
+      .container{
+        border: solid red;
+      }
 
       .div-container-card {
         display: flex;
@@ -22,25 +25,19 @@ export default class Book extends HTMLElement {
         justify-content: center;
         align-items: center;
         cursor: pointer;
-        height: auto;
         text-align: center;
+      }
+      .desc {
+        display: none;
+        position: fixed;
+        height: 300px;
+        width: 200px;
+        overflow-y: auto; 
+        background-color: white;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
         border-radius: 10px;
-        transition: transform 0.3s ease-out; /* Añadido para una transición suave */
-      }
-      .desc{
-        display:none;
-      }
-      .div-container-card:hover {
-        .result_img {
-          display:none;
-        }
-        .desc{
-          display:block;
-          transition: transform 0.3s ease-out; /* Añadido para una transición suave */
-        }
-        overflow: auto;
-        transform: scale(1); /* Añadido para agrandar la carta al pasar el ratón */
-      }
+        padding: 5px; 
+      }      
       .result_img {
         box-shadow: -4px 4px 8px grey;
         border-radius: 10px;
@@ -48,26 +45,29 @@ export default class Book extends HTMLElement {
         border-left: groove 2px black;
         height: 200px;
       }
+      .title, .author, .linkButton{
+        font-family: "Roboto Slab", serif;
+        font-optical-sizing: auto;
+        font-style: normal
+      }
       .text-area {
         margin-top: 7px;
       }
-      .container-popup {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background-color: white;
-        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-        padding: 20px;
-        border-radius: 10px;
-        z-index: 1000;
+      .description{
+        font-family: "Merriweather", serif;
+        font-weight: 400;
+        font-style: normal;
+        font-size: 14px; 
       }
-      .popup-btnClose{
-        color: red;
-        font-size: 31px;
-        cursor: pointer;
+      .desc a {
+        color: white;
       }
-    `;
+      .desc button {
+        width: 89px;
+        margin: 10px 0 10px;
+        background: black;
+      }
+      `;
     this.shadow.appendChild(style);
     this.render();
   }
@@ -85,10 +85,20 @@ export default class Book extends HTMLElement {
         <img class="result_img" src="${image}" alt="Book Cover" />
         <div class="text-area">
           <h3 class="title">Titulo de tu libro</h3>
-          <p>Author</p>
+          <p class="author">Author</p>
         </div>
         <div class="desc">
+          <button class="button"><a  class="linkButton" href="https://www.google.com.ar">Ver más</a></button>
          <p class="description">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quo laboriosam consequuntur earum corrupti numquam iste quisquam optio nihil, laudantium officia.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas, ipsam!         
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas, ipsam!         
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas, ipsam!         
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas, ipsam!         
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas, ipsam!         
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas, ipsam!         
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas, ipsam!         
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas, ipsam!         
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas, ipsam!         
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas, ipsam!         
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas, ipsam!         
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas, ipsam!         
@@ -96,6 +106,21 @@ export default class Book extends HTMLElement {
         </div>
       </div>
     `;
+    const open: HTMLImageElement = divContainer.querySelector(
+      ".div-container-card"
+    )!;
+    const hiddenImg: HTMLImageElement =
+      divContainer.querySelector(".result_img")!;
+    const desc: HTMLDivElement = divContainer.querySelector(".desc")!;
+    open.addEventListener("click", e => {
+      desc.style.display = desc.style.display === "block" ? "none" : "block";
+      // Equal
+      // if (desc.style.display === "block") {
+      //   desc.style.display = "none";
+      // } else {
+      //   desc.style.display = "block";
+      // }
+    });
     // const data = await getData(this.titleBook);
     // data.items.map(item => {
     //   let thumbnail =

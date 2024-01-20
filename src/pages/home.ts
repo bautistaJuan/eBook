@@ -12,21 +12,37 @@ function initHome(params) {
         .book-element_container{
           min-height: 100vh;
         }
+        .formSearchBook{
+          gap:2px;
+          display: flex;
+          height: 34px;
+          justify-content: center;
+          padding: 3px;
+        }
         .results-container{
+          border: solid;
           display: flex;
           flex-wrap: wrap;
           justify-content: center;
           align-items: center;
+          margin-top: 50px;
+        }
+        .inputText{
+          width:50%;
+        }
+        .inputText, .btn{
+          padding: 5px; 
+          font-family: "Roboto Slab", serif;
+          font-weight: 500;
+          font-style: normal;
         }
         .column {
-          flex: 1; /* Hace que ambas columnas ocupen el mismo ancho */
-          max-width: 150px; /* Puedes ajustar este valor según tus necesidades */
+          flex: 1; 
           margin: 10px;
-          padding: 20px;
+          padding-bottom: 9px;
           border: 1px solid #ddd;
           box-sizing: border-box;
-      }
-    
+        }    
       `;
       this.render();
       this.shadow.appendChild(style);
