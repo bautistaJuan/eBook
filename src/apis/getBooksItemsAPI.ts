@@ -1,6 +1,4 @@
 async function getData(title: string) {
-  console.log("titulo", title);
-
   // Search for Volume especif :
   // const getAPIBooksVolume = await fetch(
   //   `https://www.googleapis.com/books/v1/volumes/gNAwDwAAQBAJ?key=AIzaSyArKJEmIP1SiCVdKvcHxrlum0T3BaDuX1o`
@@ -10,24 +8,15 @@ async function getData(title: string) {
   //   `https://www.googleapis.com/books/v1/volumes?q=gato+inauthor:Poe&maxResults=20&key=AIzaSyArKJEmIP1SiCVdKvcHxrlum0T3BaDuX1o`
   // );
 
-  const titleDefault = "Javascript";
   // Search for title  :
   const getAPIBooksT = await fetch(
-    `https://www.googleapis.com/books/v1/volumes?q=${title}&maxResults=40&key=AIzaSyArKJEmIP1SiCVdKvcHxrlum0T3BaDuX1o`
-  );
-  const booksDefault = await fetch(
-    `https://www.googleapis.com/books/v1/volumes?q=${titleDefault}&maxResults=40&key=AIzaSyArKJEmIP1SiCVdKvcHxrlum0T3BaDuX1o`
+    `https://www.googleapis.com/books/v1/volumes?q=${title}&maxResults=30&key=AIzaSyArKJEmIP1SiCVdKvcHxrlum0T3BaDuX1o`
   );
   // Next Page  Result :
   // const nextPage = await fetch(
   //   `https://www.googleapis.com/books/v1/volumes?q=gato&maxResults=20&startIndex=3&key=AIzaSyArKJEmIP1SiCVdKvcHxrlum0T3BaDuX1o`
   // );
   const getEbooksT = await getAPIBooksT.json();
-  const defaultTitle = await booksDefault.json();
-  if (title != "") {
-    return getEbooksT;
-  } else {
-    return defaultTitle;
-  }
+  return getEbooksT;
 }
 export { getData };
