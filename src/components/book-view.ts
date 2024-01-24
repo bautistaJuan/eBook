@@ -18,76 +18,34 @@ export default class Book extends HTMLElement {
       h1, h2, h3, h4, p {
         margin: 0;
       }
-      .container{
-        border: solid red;
-        display: flex;
-        border: solid red;
-        flex-direction: row;
-        flex-wrap: wrap;
-      }
-
       .div-container-card {
+        border: solid blue;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        cursor: pointer;
         text-align: center;
-      }
-      .desc {
-        overflow-y: auto;
-        background-color: white;
-        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-        border-radius: 10px;
-        padding: 5px;
-        text-align: justify;
-        width: 300px;
-        height: 400px;
-      }      
-      .result_img {
-        box-shadow: -4px 4px 8px grey;
-        border-radius: 10px;
-        border-bottom: double 2px;
-        border-left: groove 2px black;
-      }
-      .title, .author, .linkButton{
-        font-family: "Roboto Slab", serif;
-        font-optical-sizing: auto;
-        font-style: normal
-      }
-      .text-area {
-        margin-top: 7px;
-      }
-      .description{
-        font-family: "Merriweather", serif;
-        font-weight: 400;
-        font-style: normal;
-        font-size: 14px; 
-      }
-      .desc a {
+        border: solid blue;
+        background-color: orangered;
         color: white;
+        border-radius: 20px;
+        box-shadow: 0 3px 12px 2px;
+        position: relative;
+        padding: 2px;
       }
-      .desc button {
-        width: 89px;
-        margin: 10px 0 10px;
-        background: black;
+      .desc{
+        display:none;
+        height: 100%;
+        position: absolute;
+        background-color: black;
+        overflow: auto;
       }
-      .column {
-        flex: 1; 
-        margin: 10px;
-        padding-bottom: 9px;
-        box-sizing: border-box;
-      } 
-
       `;
     this.shadow.appendChild(style);
     this.render();
   }
 
   async render() {
-    const divContainer = document.createElement("div");
-    divContainer.className = "container";
-
     const data = await getData(this.titleBook);
 
     data.items.forEach(item => {
@@ -111,12 +69,11 @@ export default class Book extends HTMLElement {
               <p class="author">Author</p>
             </div>
           </div>
-          <div class="desc" style="display: none;">
+          <div class="desc">
             <button class="button"><a class="linkButton" href="https://www.google.com.ar">Ver más</a></button>
             <p class="description">${description}</p>
           </div>
         `;
-
         const desc: HTMLElement = divCardContainer.querySelector(".desc")!;
         const result: HTMLElement = divCardContainer.querySelector(".result")!;
 
@@ -126,11 +83,9 @@ export default class Book extends HTMLElement {
               ? "block"
               : "none";
         });
-
-        divContainer.appendChild(divCardContainer);
+        this.shadow.appendChild(divCardContainer);
       }
     });
-    this.shadow.appendChild(divContainer);
   }
 }
 
