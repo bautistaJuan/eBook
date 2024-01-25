@@ -10,6 +10,7 @@ export default class Book extends HTMLElement {
     console.log("title", this.titleBook);
   }
   connectedCallback() {
+    //Luces
     const style = document.createElement("style");
     style.innerHTML = `
     *{
@@ -18,60 +19,101 @@ export default class Book extends HTMLElement {
       h1, h2, h3, h4, p {
         margin: 0;
       }
+      .containerBooks{
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        justify-content: center;
+        align-items: center;
+        margin-top: 40px;
+      }
       .div-container-card {
-        border: solid blue;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         text-align: center;
-        border: solid blue;
-        background-color: orangered;
-        color: white;
-        border-radius: 20px;
-        box-shadow: 0 3px 12px 2px;
         position: relative;
-        padding: 2px;
+        width: 180px;
+        height: 290px;
+        overflow: auto;
+        box-shadow: -2px 4px 7px 0px;
+        border-radius: 5px;
+        cursor:pointer;
+
       }
       .desc{
         display:none;
-        height: 100%;
         position: absolute;
-        background-color: black;
         overflow: auto;
+        background-color: white;
+        font-size: 17px;
+        text-align: start;
+        color: black;
+        padding: 6px;
+        height: 100%;
       }
+      .result_img{
+        width: 100%;
+        object-fit: scale-down;
+      }
+      .title, .author{
+        text-decoration: underline;
+      }
+      .button > a {
+        text-decoration: none;
+        font-size: 15px;
+        color: white;
+      }
+      .button{
+        width: 100%;
+        border-radius: 4px;
+        padding: 5px;
+        border: none;
+        background-color: black;
+        margin-top: 10px;
+      }
+
       `;
     this.shadow.appendChild(style);
     this.render();
   }
 
   async render() {
+    //Camara
+    const containerBooks = document.createElement("div");
+    containerBooks.className = "containerBooks";
     const data = await getData(this.titleBook);
-
+    //Accion
     data.items.forEach(item => {
       let thumbnail =
         item.volumeInfo.imageLinks && item.volumeInfo.imageLinks.smallThumbnail;
       let description = item.volumeInfo.description;
       let title = item.volumeInfo.title;
+      let author = item.volumeInfo.authors;
+      let previewLink =
+        item.volumeInfo.webReaderLink || item.volumeInfo.previewLink;
 
       if (
         thumbnail !== undefined &&
         description !== undefined &&
-        title !== undefined
+        title !== undefined &&
+        author !== undefined &&
+        previewLink !== undefined
       ) {
         const divCardContainer = document.createElement("div");
-        divCardContainer.className = "div-container-card column";
+        divCardContainer.className = "div-container-card";
         divCardContainer.innerHTML = `
           <div class="result">
             <img class="result_img" src="${thumbnail}" alt="Book Cover" />
+            </div>
             <div class="text-area">
               <h3 class="title">${title}</h3>
-              <p class="author">Author</p>
+              <p class="author">${author}</p>
             </div>
-          </div>
           <div class="desc">
-            <button class="button"><a class="linkButton" href="https://www.google.com.ar">Ver más</a></button>
-            <p class="description">${description}</p>
+          <p class="description">${description}</p>
+          <button class="button"><a class="linkButton" target="_blank" href=${previewLink}>Ver más</a></button>
           </div>
         `;
         const desc: HTMLElement = divCardContainer.querySelector(".desc")!;
@@ -83,8 +125,9 @@ export default class Book extends HTMLElement {
               ? "block"
               : "none";
         });
-        this.shadow.appendChild(divCardContainer);
+        containerBooks.appendChild(divCardContainer);
       }
+      this.shadow.appendChild(containerBooks);
     });
   }
 }

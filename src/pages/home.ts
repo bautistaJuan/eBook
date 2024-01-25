@@ -7,6 +7,7 @@ function initHome(params) {
     }
 
     connectedCallback() {
+      //Luces
       const style = document.createElement("style");
       style.innerHTML = `
         .book-element_container{
@@ -18,10 +19,20 @@ function initHome(params) {
           height: 34px;
           justify-content: center;
           padding: 3px;
+          margin-top: 30px 
         }
   
         .inputText{
           width:50%;
+        }
+        .btn{
+          border: none;
+          background-color: #0179ca;
+          border-radius: 5px;
+          width: 60px;
+          color: white;
+          cursor: pointer;
+          font-weight: 600;
         }
         .inputText, .btn{
           padding: 5px; 
@@ -36,6 +47,7 @@ function initHome(params) {
     }
 
     async render() {
+      //Camara
       const divContainer = document.createElement("div");
       divContainer.className = "book-element_container";
 
@@ -49,6 +61,7 @@ function initHome(params) {
 
       this.shadow.appendChild(divContainer);
 
+      // Accion
       const form: HTMLFormElement =
         divContainer.querySelector(".formSearchBook")!;
       const input: HTMLInputElement =
