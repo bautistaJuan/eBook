@@ -39,8 +39,7 @@ export default class Book extends HTMLElement {
         overflow: auto;
         box-shadow: -2px 4px 7px 0px;
         border-radius: 5px;
-        cursor:pointer;
-
+        cursor:pointer;        
       }
       .desc{
         display:none;
